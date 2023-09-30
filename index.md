@@ -25,3 +25,13 @@ I'm a data scientist at Intel. I have a Ph.D. in computational nuclear physics f
 Outside of machine learning, I like to spend time with my family and friends. I also like to do a lot of hiking and photography (though I'm still learning the latter).
 
 Hope you find helpful whatever you're reading here!
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-22GL1YEN2P"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-22GL1YEN2P');
+</script>
