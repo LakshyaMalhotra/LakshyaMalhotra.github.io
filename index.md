@@ -8,7 +8,7 @@ img {
 }
 </style>
 
-<img src="images/lakshya_malhotra.jpg" alt="image" style="width:470px;height:400px;" class="center">
+<img src="images/lakshya_malhotra.jpg" alt="image" style="width:470px;height:410px;" class="center">
 
 ---
 <!-- <center>
