@@ -1,4 +1,5 @@
-# Introduction
+# Mathematical details behind self-attention
+## Introduction
 In the ever-evolving landscape of artificial intelligence and machine learning, the self-attention mechanism has emerged as a pivotal innovation, revolutionizing the way models understand and process information. Introduced as part of the transformer architecture, self-attention has rapidly become a cornerstone in natural language processing (NLP) and beyond.
 
 At its core, the self-attention mechanism allows a model to weigh the importance of different words in a sentence when making predictions. Unlike traditional sequence processing methods, such as recurrent neural networks (RNNs) and long short-term memory networks (LSTMs), which process data sequentially, self-attention enables models to consider the entire sequence of words simultaneously. This parallelism not only speeds up training and inference but also provides a more nuanced understanding of the relationships between words, capturing dependencies regardless of their distance from each other in the text.
@@ -9,15 +10,15 @@ Moreover, self-attention is not limited to NLP. Its versatility extends to other
 
 We will try to understand how exactly self-attention works and the intuitions behind it in more detail in this post. Although there already exists tons of great resources on self-attention mechanism, in order to understand it better for my learnings, I wanted to get some visual intuition behind this concept. One other motivation to write this post is to see how beautifully it leverages the concepts of linear-algebra.  After explaining it conceptually, I will end this post by implementing multihead self-attention using just vanilla PyTorch.
 
-# Embeddings
+## Embeddings
 Embeddings represent words/tokens as high dimensional vectors in a way that similar words are located closed to each other. Words having high similarity are placed closer to each other whereas words with low similarity will be pushed far away from each other in this space.
 
-## How are the words placed together or far apart?
+### How are the words placed together or far apart?
 Similar words are placed together by the context, meaning the words in the sentence decide how much closer two words will be placed to each other.
 
 How do we find the similarity between two words though? Well, it turns out we first need to represent the words/tokens as vectors in the embedding space and use a measure of similarity between those two vectors. There are multiple choices available for such a metric.
 
-### Word Similarity
+#### Word Similarity
 - Although it seems convenient but euclidean distance is not the correct measure of the word similarity
 - Measures of the word similarity in the embedding space:
 	- **Dot product:** Elementwise product followed by the sum of the two words being represented as vectors:$$u = \sum_{i=0}^{n} a_{i} \cdot b_{i} $$
@@ -30,8 +31,8 @@ How do we find the similarity between two words though? Well, it turns out we fi
 >
 > 2. The bottom plots assigns some coordinates to the points for interpretability and calculates dot product and cosine similarities.
 
-# So what is self-attention?
-> NOTE: This is my take on the self-attention, it is adapted from the excellent video by Luis Serrano. Please make sure to check it out for more details.
+## So what is self-attention?
+> NOTE: This is my take on the self-attention, it is adapted from the excellent [video](https://www.youtube.com/watch?v=UPtG_38Oq8o&t=1168s) by Luis Serrano. Please make sure to check it out for more details.
 
 Now that we have talked about word similarity, we can play with linear transformations a bit more. For simplicity and for visualization, we will assume that our embeddings space is two dimensional.
 
@@ -161,7 +162,7 @@ From the basic linear algebra, we know that matrices are nothing but the linear 
 
 Let's try to understand this by a few examples. Consider a set of two vectors whose $x$ and $y-$ coordinates are represented as column vectors:
 
-$v_{1}=\begin{pmatrix} 1\\ 0 \end{pmatrix}$ and $v_{2}=\begin{pmatrix} 0\\ 1 \end{pmatrix}$
+$v_{1}=\begin{pmatrix} 1 \\ 0 \end{pmatrix}$ and $v_{2}=\begin{pmatrix} 0 \\ 1 \end{pmatrix}$
 
 and let's analyze the effect of the linear transformations on these vectors as well as their similarity. The original similarity between $v_{1}$ and $v_{2}$ is 0 since they are orthogonal to each other.
 ### Example 1: Stretching in one direction
