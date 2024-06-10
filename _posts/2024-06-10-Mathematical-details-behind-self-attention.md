@@ -162,7 +162,9 @@ From the basic linear algebra, we know that matrices are nothing but the linear 
 
 Let's try to understand this by a few examples. Consider a set of two vectors whose $x$ and $y-$ coordinates are represented as column vectors:
 
-```math $v_{1}=\begin{pmatrix} 1 \\ 0 \end{pmatrix}$ and $v_{2}=\begin{pmatrix} 0 \\ 1 \end{pmatrix}$```
+$$v_{1}=\begin{pmatrix} 1 \\ 0 \end{pmatrix}$$,
+
+$$v_{2}=\begin{pmatrix} 0 \\ 1 \end{pmatrix}$$
 
 and let's analyze the effect of the linear transformations on these vectors as well as their similarity. The original similarity between $v_{1}$ and $v_{2}$ is 0 since they are orthogonal to each other.
 ### Example 1: Stretching in one direction
@@ -184,7 +186,9 @@ The similarity still stays the zero because the resultant vectors are still orth
 ### Example 2: Effect on dissimilar vectors
 For this case, let's make things a bit more complicated and see how the matrix $A$ from example 1 above transforms two arbitrary vectors:
 
-```math $v_{3}=\begin{pmatrix}1 \\ 1 \end{pmatrix}$ and $v_{4}=\begin{pmatrix}-1 \\ 0 \end{pmatrix}$```
+$$v_{3}=\begin{pmatrix}1 \\ 1 \end{pmatrix}$$,
+
+$$v_{4}=\begin{pmatrix}-1 \\ 0 \end{pmatrix}$$
 
 For the sake of comparison, I will calculate the similarity scores as well as attention weights of these:
 ```python
