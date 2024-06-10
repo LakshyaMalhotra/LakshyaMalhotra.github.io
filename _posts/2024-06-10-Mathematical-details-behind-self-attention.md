@@ -88,7 +88,7 @@ Cave = 0.43 * Bat + 0.57 * Cave
 
 are the context vectors for the "Bat" and the "Cave" tokens in the embedding space.
 
-On a higher level, this is exactly how the attention mechanism works &ndash; we took a word token (query) and look in its own sequence (keys) to find the information that should be used from other words to create a context vector.
+On a higher level, **this is exactly how the attention mechanism works** &ndash; we took a word token (query) and look in its own sequence (keys) to find the information that should be used from other words to create a context vector.
 
 To summarize, we took the following steps to calculate the context vector:
 1. **Calculate attention scores:** The attention mechanism calculates the similarity scores between each pair of the input sequence. Higher the similarity score, the more relevant is the key to the current query. I used cosine similarity but in the original "Attention is all you need" paper, it is done by calculating scaled dot-product similarity.
@@ -162,7 +162,7 @@ From the basic linear algebra, we know that matrices are nothing but the linear 
 
 Let's try to understand this by a few examples. Consider a set of two vectors whose $x$ and $y-$ coordinates are represented as column vectors:
 
-$$\quad$$ $$v_{1}=\begin{pmatrix} 1 \\ 0 \end{pmatrix}$$, $$v_{2}=\begin{pmatrix} 0 \\ 1 \end{pmatrix}$$
+$$\qquad$$ $$v_{1}=\begin{pmatrix} 1 \\ 0 \end{pmatrix}$$, $$v_{2}=\begin{pmatrix} 0 \\ 1 \end{pmatrix}$$
 
 and let's analyze the effect of the linear transformations on these vectors as well as their similarity. The original similarity between $v_{1}$ and $v_{2}$ is 0 since they are orthogonal to each other.
 ### Example 1: Stretching in one direction
@@ -184,7 +184,7 @@ The similarity still stays at zero because the resultant vectors are still ortho
 ### Example 2: Effect on dissimilar vectors
 For this case, let's make things a bit more complicated and see how the matrix $A$ from example 1 above transforms two arbitrary vectors:
 
-$$\quad$$ $$v_{3}=\begin{pmatrix}1 \\ 1 \end{pmatrix}$$, $$v_{4}=\begin{pmatrix}-1 \\ 0 \end{pmatrix}$$
+$$\qquad$$ $$v_{3}=\begin{pmatrix}1 \\ 1 \end{pmatrix}$$, $$v_{4}=\begin{pmatrix}-1 \\ 0 \end{pmatrix}$$
 
 For the sake of comparison, I will calculate the similarity scores as well as attention weights of these:
 ```python
@@ -239,7 +239,7 @@ print(attn_weights2)
 # prints
 # array([0.88, 0.12])
 ```
-From this simple exercise, we can see that transforming vectors with matrices can increase/decrease the similarity score and hence the attention weights between two vectors. This is what *K*, *Q* and *V* does to the input embedding vectors. They are trainable meaning during the course of training, their weights will be optimized to change the manifold. This will increase/decrease the similarity between tokens on the basis of the loss function optimization during training.
+From this simple exercise, we can see that transforming vectors with matrices can increase/decrease the similarity score and hence the attention weights between two vectors. **This is what *K*, *Q* and *V* does to the input embedding vectors**. They are trainable meaning during the course of training, their weights will be optimized to change the manifold. This will increase/decrease the similarity between tokens on the basis of the loss function optimization during training.
 
 >  To put in simpler terms, consider a python dictionary where each key refers to the name of a user and the corresponding values contains the addresses and the phone numbers. Let's say we need to find the details of the users with names similar to "Alex". In this case, "Alex" is the query which is the search string. Keys will be all the user names in the dictionary (dictionary keys). But we don't want to fetch the keys, rather we want the addresses and the phone numbers associated with the keys. Here, the addresses and the phone numbers are the values.
 >
