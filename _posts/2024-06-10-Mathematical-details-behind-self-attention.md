@@ -239,7 +239,7 @@ print(attn_weights2)
 # prints
 # array([0.88, 0.12])
 ```
-From this simple exercise, we can see that transforming vectors with matrices can increase/decrease the similarity score and hence the attention weights between two vectors. **This is what *K*, *Q* and *V* does to the input embedding vectors**. They are trainable meaning during the course of training, their weights will be optimized to change the manifold. This will increase/decrease the similarity between tokens on the basis of the loss function optimization during training.
+From this simple exercise, we can see that transforming vectors with matrices can increase/decrease the similarity score and hence the attention weights between two vectors. This is what ***K*, *Q* and *V* do to the input embedding vectors**. They are trainable meaning during the course of training, their weights will be optimized to change the manifold. This will increase/decrease the similarity between tokens on the basis of the loss function optimization during training.
 
 >  To put in simpler terms, consider a python dictionary where each key refers to the name of a user and the corresponding values contains the addresses and the phone numbers. Let's say we need to find the details of the users with names similar to "Alex". In this case, "Alex" is the query which is the search string. Keys will be all the user names in the dictionary (dictionary keys). But we don't want to fetch the keys, rather we want the addresses and the phone numbers associated with the keys. Here, the addresses and the phone numbers are the values.
 >
