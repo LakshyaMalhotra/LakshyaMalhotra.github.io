@@ -22,7 +22,9 @@ img {
 </center> -->
 
 
-I'm a data scientist at Intel. I have a Ph.D. in computational nuclear physics from [University of Kentucky](https://www.uky.edu/). I did my postdoctoral research at [University of Wisconsin-Madison](https://www.wisc.edu/) specializing in the applications of deep learning in plasma fusion. I'm passionate about artificial intelligence and its applications to the physical sciences.
+I'm a data scientist at Intel. I have a Ph.D. in computational nuclear physics from [University of Kentucky](https://www.uky.edu/). I did my postdoctoral research at [University of Wisconsin-Madison](https://www.wisc.edu/) specializing in the applications of deep learning in plasma fusion.
+
+I love writing high performance code and am passionate about artificial intelligence and its applications to the physical sciences.
 
 Outside of machine learning, I like to spend time with my family and friends. I also like to do a lot of hiking and photography (though I'm still learning the latter).
 
