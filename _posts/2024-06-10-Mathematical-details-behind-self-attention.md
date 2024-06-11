@@ -6,7 +6,7 @@ At its core, the self-attention mechanism allows a model to weigh the importance
 
 The intuitive appeal of self-attention lies in its ability to dynamically adjust the focus of the model based on the context. For instance, in the sentence "The cat sat on the mat because it was tired," the word "it" refers to "the cat." A self-attention mechanism can learn this relationship by assigning higher importance to "the cat" when processing "it," enhancing the model's comprehension of pronoun references and improving overall performance on tasks such as translation, summarization, and question answering.
 
-Moreover, self-attention is not limited to NLP. Its versatility extends to other domains like computer vision, where it helps in tasks such as image classification and object detection by allowing models to focus on relevant parts of an image. Because of its impact, its worthwhile to understand the abstractions behind this concept from the mathematical point of view.
+Moreover, self-attention is not limited to NLP. Its versatility extends to other domains like computer vision, where it helps in tasks such as image classification and object detection by allowing models to focus on relevant parts of an image.
 
 We will try to understand how exactly self-attention works and the intuitions behind it in more detail in this post. Although there already exists tons of great resources on self-attention mechanism, in order to understand it better for my learnings, I wanted to get some visual intuition behind this concept. One other motivation to write this post is to see how beautifully it leverages the concepts of linear-algebra.  After explaining it conceptually, I will end this post by implementing multihead self-attention using just vanilla PyTorch.
 
@@ -155,10 +155,10 @@ The "key" is like a database key used for indexing and searching. In the attenti
 
 The "value" in this context is similar to the value in a key-value pair in a database. It represents the actual content or representation of the input items. Once the model determines which keys (and thus which parts of the input) are most relevant to the query (the current focus item), it retrieves the corresponding values.
 
-For self-attention, this is where the actual magic happens: instead of using the embedding vectors of the input tokens directly as key-query-value. These vectors are actually obtained by transforming the input embedding vectors with three matrices &ndash; *K*, *Q* and *V*. These matrices are optimized during the course of training using backpropagation.
+For self-attention, this is where the actual magic happens: instead of using the embedding vectors of the input tokens directly as key-query-value, we calculate key, query and value vectors during the training. These vectors are actually obtained by transforming the input embedding vectors with three matrices &ndash; *K*, *Q* and *V*. There is something special about these matrices which I will cover in the next section.
 
 ### Intuition behind *K*, *Q* and *V* matrices
-From the basic linear algebra, we know that matrices are nothing but the linear transformations or rules that operate on vectors and change their properties like rotate them by a certain angle, reflect them about some axis, etc. These trainable matrices for query, keys and values do something similar &ndash; stretch, shear, or elongate the manifolds such that the similarity of the alike words increases whereas for dissimilar words it decreases.
+From the basic linear-algebra, we know that matrices are nothing but the linear transformations or rules that operate on vectors and change their properties like rotate them by a certain angle, reflect them about some axis, etc. These trainable matrices for query, keys and values do something similar &ndash; stretch, shear, or elongate the manifolds such that the similarity of the alike words increases whereas for dissimilar words it decreases. These matrices are adaptive to the dataset, meaning they are optimized during the course of training using backpropagation.
 
 Let's try to understand this by a few examples. Consider a set of two vectors whose $x$ and $y-$ coordinates are represented as column vectors:
 
@@ -245,7 +245,7 @@ From this simple exercise, we can see that transforming vectors with matrices ca
 >
 > For this example, think of *K*, *Q* and *V* matrices as rules to standardize the user names and their corresponding keys &ndash; make them lowercase, remove the punctuations, etc.
 
-This is all I want to talk about the mathematical details about self-attention. Now, I'll move on to implementing self-attention using plain PyTorch. I should mention that much of this code of implementation is resulted from my notes from [Sebastian Raschka's great book](https://sebastianraschka.com/books/#build-a-large-language-model-from-scratch) &ndash; Build a Large Language Model (From Scratch). Check it out if you want to understand the inner workings of the large language models.
+Understanding these mathematical details allows us to appreciate this concept even more, not to mention it gives us an insight about its internal machinery. Now, I will move on to implementing self-attention using plain PyTorch. I should mention that much of this implementation code is resulted from my notes from a great read by [Sebastian Raschka](https://sebastianraschka.com/books/#build-a-large-language-model-from-scratch) &ndash; Build a Large Language Model (From Scratch). Check it out if you want to understand the inner workings of the LLMs.
 
 ## Implementing Multi-head self-attention
 Multi-head self-attention applies self-attention multiple times at once, with each self-attention instance being called a *head*, each with different key, query, and value transformations of the same input, and then combines the outputs.
@@ -300,9 +300,9 @@ class MultiHeadAttention(nn.Module):
 		return torch.cat([head(x) for head in self.heads], dim=-1)
 ```
 
-While the above implementation is pretty simple to understand for learning purposes, it is not suitable for tasks where we want to mask the information of the future words and each word prediction only depends on the previous words. In such cases, we use something called as *causal attention* where we mask the information about the future words in the sequence thereby prohibiting the model's access of them.
+While the above implementation is pretty simple to understand for learning purposes, it is not meant for production. It is also not suitable for tasks where we want to mask the information of the future words and each word prediction only depends on the previous words. In such cases, we use something called as *causal attention* where we mask the information about the future words in the sequence thereby prohibiting the model's access of them.
 
-Moreover, the above implementation in not very computationally efficient &ndash; self-attention of all the heads is calculated sequentially with the `for` loop and then concatenated together. This could be easily parallelized by splitting the input into multiple heads by reshaping the projected query, key, and value tensors and then combines the results from these heads after computing attention. Please refer to Sebastian Raschka's book for more details.
+Moreover, the above implementation is not very computationally efficient &ndash; self-attention of all the heads is calculated sequentially with the `for` loop and then concatenated together. This could be easily parallelized by splitting the input into multiple heads by reshaping the projected query, key, and value tensors and then combines the results from these heads after computing attention. Please refer to Sebastian Raschka's book for more details.
 
 ## References
 1. Stanford CS224N:  Natural Language Processing with Deep Learning
