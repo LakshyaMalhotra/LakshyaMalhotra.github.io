@@ -245,5 +245,66 @@ From this simple exercise, we can see that transforming vectors with matrices ca
 >
 > For this example, think of *K*, *Q* and *V* matrices as rules to standardize the user names and their corresponding keys &ndash; make them lowercase, remove the punctuations, etc.
 
+This is all I want to talk about the mathematical details about self-attention. Now, I'll move on to implementing self-attention using plain PyTorch. I should mention that much of this code of implementation is resulted from my notes from [Sebastian Raschka's great book](https://sebastianraschka.com/books/#build-a-large-language-model-from-scratch) &ndash; Build a Large Language Model (From Scratch). Check it out if you want to understand the inner workings of the large language models.
 
+## Implementing Multi-head self-attention
+Multi-head self-attention applies self-attention multiple times at once, with each self-attention instance being called a *head*, each with different key, query, and value transformations of the same input, and then combines the outputs.
 
+```python
+import torch
+import torch.nn as nn
+
+# Helper class for Self-Attention calculation
+class SelfAttention(nn.Module):
+	def __init__(self, input_dim, output_dim):
+		super().__init__()
+		self.output_dim = output_dim
+
+		# matrices for Query, Key, and Value
+		self.W_query = nn.Linear(
+			in_features=input_dim, out_features=output_dim, bias=False
+		)
+		self.W_key = nn.Linear(
+			in_features=input_dim, out_features=output_dim, bias=False
+		)
+		self.W_value = nn.Linear(
+			in_features=input_dim, out_features=output_dim, bias=False
+		)
+
+	def forward(self, x): # x shape: (N, input_dim), N: number of tokens
+		queries = self.W_query(x)
+		keys = self.W_key(x)
+		values = self.W_value(x)
+
+		# attention scores
+		attn_scores = queries @ keys.T # N x N
+
+		# attention weights
+		attn_weights = torch.softmax(attn_scores / self.d_out**0.5, dim=-1)
+
+		# compute context vector
+		context_vec = attn_weights @ values # N x output_dim
+
+		return context_vec
+
+# Multi-head self-attention
+class MultiHeadAttention(nn.Module):
+	def __init__(self, input_dim, output_dim, num_heads):
+		super().__init__()
+		self.heads = [
+			SelfAttention(input_dim, output_dim)
+			for _ in range(num_heads)
+		]
+
+	def forward(self, x):
+		return torch.cat([head(x) for head in self.heads], dim=-1)
+```
+
+While the above implementation is pretty simple to understand for learning purposes, it is not suitable for tasks where we want to mask the information of the future words and each word prediction only depends on the previous words. In such cases, we use something called as *causal attention* where we mask the information about the future words in the sequence thereby prohibiting the model's access of them.
+
+Moreover, the above implementation in not very computationally efficient &ndash; self-attention of all the heads is calculated sequentially with the `for` loop and then concatenated together. This could be easily parallelized by splitting the input into multiple heads by reshaping the projected query, key, and value tensors and then combines the results from these heads after computing attention. Please refer to Sebastian Raschka's book for more details.
+
+## References
+1. Stanford CS224N:  Natural Language Processing with Deep Learning
+2. Build a Large Language Model (From Scratch) by Sebastian Raschka
+3. Serrano.Academy - The math behind Attention: Keys, Queries, and Values matrices
