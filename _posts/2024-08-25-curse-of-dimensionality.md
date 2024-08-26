@@ -72,8 +72,9 @@ The chi distribution generalizes to various dimensions, with the shape and scale
 
 Ratio plot:
 
-<embed type="text/html" src="/home/lakshya/work/islp/chapter_12/ratio_plot.html" width="800" height="600"></embed>
+<!-- <embed type="text/html" src="/home/lakshya/work/islp/chapter_12/ratio_plot.html" width="800" height="600"></embed> -->
 
+<iframe src="images/ratio_plots.html" width="800" height="600"></iframe>
 ## Principal Component Analysis
 It's a tool for providing a low-dimensional representation of the dataset without losing much of the information. By information we meant, it tries to capture as much variation in the data as possible.
 
