@@ -50,6 +50,6 @@ With all this machine learning business at work, my love for physics is not comp
 
 I do have a life outside of machine learning :). I love going to hiking trails and capturing beautiful landscapes with my camera.
 
-**List of my blogs can be found [here](https://lakshyamalhotra.github.io/)**
-
 Hope you find whatever you're reading here helpful!
+
+**List of my blogs can be found [here](https://lakshyamalhotra.github.io/).**
