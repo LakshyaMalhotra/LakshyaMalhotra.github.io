@@ -1,6 +1,6 @@
 # About
 
-Hi, My name is Lakshya. Thank you for visiting me here. "Cognitive Chaos" is my personal blog where I write about topics that interest me.
+Hi, My name is Lakshya. Thank you for visiting me here. "Reflections" is my personal blog where I write about topics that interest me.
 
 <style>
 img {
@@ -25,7 +25,7 @@ I'm a Machine Learning Engineer at Intel, where I specialize in developing deep 
 
 
 ## Academic Background
-I completed my Ph.D. in Physics from the [University of Kentucky](https://www.uky.edu) in 2021, where my research centered on computational nuclear and particle physics. [My dissertation](https://uknowledge.uky.edu/physastron_etds/82/) involved conducting Maximum Likelihood analysis of neutron beta decay to investigate potential new physics signatures in Beyond Standard Model Physics. I focused on analyzing the neutron $\beta$-decay spectrum using Monte Carlo simulations that generated terabytes of data. Theoretical estimates of various beyond standard model parameters were computed at different confidence levels to provide benchmarks for future experiments.
+I completed my Ph.D. in Physics from the [University of Kentucky](https://www.uky.edu) in 2021, where my research centered on computational nuclear and particle physics. [My dissertation](https://uknowledge.uky.edu/physastron_etds/82/) involved conducting Maximum Likelihood analysis of neutron $\beta$-decay to investigate potential new physics signatures in Beyond Standard Model Physics. I focused on analyzing the neutron $\beta$-decay spectrum using Monte Carlo simulations that generated terabytes of data. Theoretical estimates of various beyond standard model parameters were computed at different confidence levels to provide benchmarks for future experiments.
 
 
 Apart from neutron $\beta$-decay, I also worked on theoretical high energy physics. In particular, I investigated how electromagnetic fields interact with accelerating relativistic particles and demonstrated the necessity of correction terms to account for Thomas rotation effects from particle acceleration. This work identified previously unrecognized higher-order terms that enhance the accuracy of interpreting experimental results in high-energy particle physics.
